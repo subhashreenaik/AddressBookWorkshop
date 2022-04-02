@@ -8,6 +8,7 @@ public class Main {
 		AddressBookService service = new AddressBookService();
 		service.add_information();
 		service.edit_Name();
+		service.delete_byName();
 		
 	}
 

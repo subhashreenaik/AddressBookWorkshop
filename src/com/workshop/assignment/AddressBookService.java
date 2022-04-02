@@ -89,6 +89,30 @@ public class AddressBookService {
 					}
 				}
 			}
+	public void delete_byName() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("enter the name of the person");
+		String name = sc.nextLine();
+		
+
+			for (int j = 0; j < contact.size(); j++) {
+				if (name.equals(contact.get(j).getFirstName())) {
+					enterInform();
+					Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+					contact.remove(j);
+				} else {
+					do{
+						System.out.println("the name is different : please give a correct name");
+						name = sc.nextLine();
+						
+					}while(! name.equals(contact.get(j).getFirstName()));
+					enterInform();
+					Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+					contact.remove(j);
+					contact.stream().forEach(s -> System.out.println(s));	
+					}
+				}
+			}
 		
 
 	
