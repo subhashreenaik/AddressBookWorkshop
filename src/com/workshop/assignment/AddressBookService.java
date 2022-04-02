@@ -1,14 +1,19 @@
 package com.workshop.assignment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+
+
 
 public class AddressBookService {
 	static String fname, lname, add, city, state, zip, phoneno, emailid;
 
 	// creating ArrayList
 	static List<Person> contact = new ArrayList<Person>();
+	static Map<String, List<Person>> addressBook = new HashMap<String, List<Person>>();
 
 	/*
 	 * This method is used to enter the information of a person like first name,last
@@ -69,65 +74,69 @@ public class AddressBookService {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("enter the name of the person");
 		String name = sc.nextLine();
-		
 
-			for (int j = 0; j < contact.size(); j++) {
-				if (name.equals(contact.get(j).getFirstName())) {
-					enterInform();
-					Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-					contact.set(j, person);
-				} else {
-					do{
-						System.out.println("the name is different : please give a correct name");
-						name = sc.nextLine();
-						
-					}while(! name.equals(contact.get(j).getFirstName()));
-					enterInform();
-					Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-					contact.set(j, person);
-					contact.stream().forEach(s -> System.out.println(s));	
-					}
-				}
+		for (int j = 0; j < contact.size(); j++) {
+			if (name.equals(contact.get(j).getFirstName())) {
+				enterInform();
+				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+				contact.set(j, person);
+			} else {
+				do {
+					System.out.println("the name is different : please give a correct name");
+					name = sc.nextLine();
+
+				} while (!name.equals(contact.get(j).getFirstName()));
+				enterInform();
+				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+				contact.set(j, person);
+				contact.stream().forEach(s -> System.out.println(s));
 			}
+		}
+	}
+
 	public void delete_byName() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("enter the name of the person");
 		String name = sc.nextLine();
-		
 
-			for (int j = 0; j < contact.size(); j++) {
-				if (name.equals(contact.get(j).getFirstName())) {
-					enterInform();
-					Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-					contact.remove(j);
-				} else {
-					do{
-						System.out.println("the name is different : please give a correct name");
-						name = sc.nextLine();
-						
-					}while(! name.equals(contact.get(j).getFirstName()));
-					enterInform();
-					Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-					contact.remove(j);
-					contact.stream().forEach(s -> System.out.println(s));	
-					}
-				}
+		for (int j = 0; j < contact.size(); j++) {
+			if (name.equals(contact.get(j).getFirstName())) {
+				enterInform();
+				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+				contact.remove(j);
+			} else {
+				do {
+					System.out.println("the name is different : please give a correct name");
+					name = sc.nextLine();
+
+				} while (!name.equals(contact.get(j).getFirstName()));
+				enterInform();
+				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+				contact.remove(j);
+				contact.stream().forEach(s -> System.out.println(s));
 			}
-		
-
-	
+		}
+	}
 
 	public void add_information() {
-		System.out.println("Enter number of Person you want to enter ");
+		System.out.println("Enter number of Person you want to enter in a address Book ");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		for (int i = 0; i < n; i++) {
+		String[] book = {"AddressBook_One","AddressBook_two","AddressBook_Three"};
+		
+		for(int j =0;j<book.length;j++) {
+			System.out.println("Enter information for "+book[j]);
+			contact=new ArrayList<Person>();
+		for(int i=0;i<n;i++) {	
 			enterInform();
 			Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
 			contact.add(person);
-
+		   
+	}addressBook.put(book[j],contact);
 		}
-		System.out.println(contact);
+		addressBook.entrySet().stream().forEach(e-> System.out.println(e));
 	}
-
 }
+
+
+	
