@@ -6,14 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
-
 public class AddressBookService {
 	static String fname, lname, add, city, state, zip, phoneno, emailid;
 
 	// creating ArrayList
 	static List<Person> contact = new ArrayList<Person>();
 	static Map<String, List<Person>> addressBook = new HashMap<String, List<Person>>();
+	static Scanner s = new Scanner(System.in);
 
 	/*
 	 * This method is used to enter the information of a person like first name,last
@@ -122,21 +121,83 @@ public class AddressBookService {
 		System.out.println("Enter number of Person you want to enter in a address Book ");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		String[] book = {"AddressBook_One","AddressBook_two","AddressBook_Three"};
-		
-		for(int j =0;j<book.length;j++) {
-			System.out.println("Enter information for "+book[j]);
-			contact=new ArrayList<Person>();
-		for(int i=0;i<n;i++) {	
+		String[] book = { "AddressBook_One", "AddressBook_two", "AddressBook_Three" };
+
+		for (int j = 0; j < book.length; j++) {
+			System.out.println("Enter information for " + book[j]);
+			contact = new ArrayList<Person>();
+			for (int i = 0; i < n; i++) {
+				enterInform();
+				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+				contact.add(person);
+
+			}
+			addressBook.put(book[j], contact);
+		}
+		addressBook.entrySet().stream().forEach(e -> System.out.println(e));
+	}
+
+	public static void duplicate() {
+		System.out.println("How many person's information You want to add in one address book");
+		int n = s.nextInt();
+		int flag = 0;
+		contact = new ArrayList<Person>();
+		for (int i = 0; i < n; i++) {
+			flag = 0;
 			enterInform();
 			Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-			contact.add(person);
-		   
-	}addressBook.put(book[j],contact);
+			if (contact.size() == 0) {
+				contact.add(person);
+			} else {
+				for (int k = 0; k < contact.size(); k++) {
+					if (contact.get(k).getFirstName().equals(person.getFirstName())) {
+						System.out.println("The name is already exist");
+						enterInform();
+						Person person1 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+						contact.add(person1);
+						flag = 1;
+						break;
+					}
+				}
+				if (flag == 0) {
+					contact.add(person);
+				}
+			}
 		}
-		addressBook.entrySet().stream().forEach(e-> System.out.println(e));
 	}
+
+	public void check_duplicate_AndADD() {
+
+		String[] book = { "AddressBookOne", "AddressBookTwo", "AddressBookThree" };
+
+		System.out.println("Enter choice...\\n1.For AddressBookOne \\n2.For AddressBookTwo \\n3.For AddressBookThree");
+		int choice = s.nextInt();
+		switch (choice) {
+		case 1:
+
+			System.out.println("Enter information for " + book[0]);
+			duplicate();
+			addressBook.put(book[0], contact);
+			addressBook.entrySet().stream().forEach(e -> System.out.println(e));
+			break;
+
+		case 2:
+
+			System.out.println("Enter information for " + book[1]);
+			duplicate();
+			addressBook.put(book[1], contact);
+			addressBook.entrySet().stream().forEach(e -> System.out.println(e));
+			break;
+
+		case 3:
+
+			System.out.println("Enter information for " + book[2]);
+			duplicate();
+			addressBook.put(book[2], contact);
+			addressBook.entrySet().stream().forEach(e -> System.out.println(e));
+			break;
+
+		}
+	}
+
 }
-
-
-	
