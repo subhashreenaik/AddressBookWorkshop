@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBookService {
 	static String fname, lname, add, city, state, zip, phoneno, emailid;
@@ -354,6 +355,19 @@ public class AddressBookService {
 					.filter(person -> person.getState().equals(stateOrCityname) || person.getCity().equals(stateOrCityname))
 					.count();
 			System.out.println("The number of people are  :"+countPeople);
+		
+		}
+	}
+	
+	/* Viewing person from address book by state or city name in dictionary using java stream*/
+	public void viewPerson_byDictionary() {
+		System.out.println("give the name of the state  :");
+		String state = s.nextLine();
+		for (Entry<String, List<Person>> j : addressBook.entrySet()) {
+			List<Person> list = j.getValue();
+			System.out.println( list.stream().filter (person-> person.getState().equals(state))
+					.collect(Collectors.toMap(person ->person.getState(), person -> person.getFirstName())));
+					
 		
 		}
 	}
