@@ -13,6 +13,7 @@ public class AddressBookService {
 	static List<Person> contact = new ArrayList<Person>();
 	static Map<String, List<Person>> addressBook = new HashMap<String, List<Person>>();
 	static Scanner s = new Scanner(System.in);
+	static String[] book = { "AddressBook_One", "AddressBook_two", "AddressBook_Three" };
 
 	/*
 	 * This method is used to enter the information of a person like first name,last
@@ -121,7 +122,6 @@ public class AddressBookService {
 		System.out.println("Enter number of Person you want to enter in a address Book ");
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		String[] book = { "AddressBook_One", "AddressBook_two", "AddressBook_Three" };
 
 		for (int j = 0; j < book.length; j++) {
 			System.out.println("Enter information for " + book[j]);
@@ -137,38 +137,7 @@ public class AddressBookService {
 		addressBook.entrySet().stream().forEach(e -> System.out.println(e));
 	}
 
-	public static void duplicate() {
-		System.out.println("How many person's information You want to add in one address book");
-		int n = s.nextInt();
-		int flag = 0;
-		contact = new ArrayList<Person>();
-		for (int i = 0; i < n; i++) {
-			flag = 0;
-			enterInform();
-			Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-			if (contact.size() == 0) {
-				contact.add(person);
-			} else {
-				for (int k = 0; k < contact.size(); k++) {
-					if (contact.get(k).getFirstName().equals(person.getFirstName())) {
-						System.out.println("The name is already exist");
-						enterInform();
-						Person person1 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-						contact.add(person1);
-						flag = 1;
-						break;
-					}
-				}
-				if (flag == 0) {
-					contact.add(person);
-				}
-			}
-		}
-	}
-
 	public void check_duplicate_AndADD() {
-
-		String[] book = { "AddressBookOne", "AddressBookTwo", "AddressBookThree" };
 
 		System.out.println("Enter choice...\\n1.For AddressBookOne \\n2.For AddressBookTwo \\n3.For AddressBookThree");
 		int choice = s.nextInt();
@@ -176,28 +145,78 @@ public class AddressBookService {
 		case 1:
 
 			System.out.println("Enter information for " + book[0]);
-			duplicate();
-			addressBook.put(book[0], contact);
-			addressBook.entrySet().stream().forEach(e -> System.out.println(e));
+
+			enterInform();
+			Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+			// System.out.println(addressBook);
+			if (addressBook.get(book[0]).size() == 0) {
+				addressBook.get(book[0]).add(person);
+
+			} else {
+				System.out.println("size is " + addressBook.get(book[0]).size());
+				for (int j = 0; j < addressBook.get(book[0]).size(); j++) {
+					if (addressBook.get(book[0]).get(j).getFirstName().equals(person.getFirstName())) {
+						System.out
+								.println("The contact person is already present ,Please give different contact person");
+						enterInform();
+						Person person1 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+						addressBook.get(book[0]).add(person1);
+
+					}
+				}
+			}
 			break;
 
 		case 2:
 
-			System.out.println("Enter information for " + book[1]);
-			duplicate();
-			addressBook.put(book[1], contact);
-			addressBook.entrySet().stream().forEach(e -> System.out.println(e));
+			System.out.println("Enter information for " + book[0]);
+
+			enterInform();
+			Person person2 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+
+			if (addressBook.get(book[1]).size() == 0) {
+				addressBook.get(book[1]).add(person2);
+
+			} else {
+				System.out.println("size is " + addressBook.get(book[1]).size());
+				for (int j = 0; j < addressBook.get(book[1]).size(); j++) {
+					if (addressBook.get(book[1]).get(j).getFirstName().equals(person2.getFirstName())) {
+						System.out
+								.println("The contact person is already present ,Please give different contact person");
+						enterInform();
+						Person person1 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+						addressBook.get(book[1]).add(person1);
+
+					}
+				}
+			}
 			break;
 
 		case 3:
-
 			System.out.println("Enter information for " + book[2]);
-			duplicate();
-			addressBook.put(book[2], contact);
-			addressBook.entrySet().stream().forEach(e -> System.out.println(e));
-			break;
 
+			enterInform();
+			Person person3 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+			// System.out.println(addressBook);
+			if (addressBook.get(book[2]).size() == 0) {
+				addressBook.get(book[2]).add(person3);
+
+			} else {
+				System.out.println("size is " + addressBook.get(book[2]).size());
+				for (int j = 0; j < addressBook.get(book[2]).size(); j++) {
+					if (addressBook.get(book[2]).get(j).getFirstName().equals(person3.getFirstName())) {
+						System.out
+								.println("The contact person is already present ,Please give different contact person");
+						enterInform();
+						Person person1 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+						addressBook.get(book[2]).add(person1);
+
+					}
+				}
+			}
+			break;
 		}
+		addressBook.entrySet().stream().forEach(e -> System.out.println(e));
 	}
 
 }
