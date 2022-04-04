@@ -11,7 +11,8 @@ public class Main {
 		service.check_duplicate_AndADD();
 		service.edit_ByName();
 		service.delete_byName();
-		service.search_city();
+		service.search_state();
+		service.count_numberOfThePersonByCity_orState();
 	}
 
 }

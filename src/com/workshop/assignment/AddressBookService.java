@@ -328,16 +328,32 @@ public class AddressBookService {
 	}
 	
 	
-	/* Searching person from address book by city name using java stream*/
+	/* Searching person from address book by state name using java stream*/
 	
-	public void search_city() {
-		System.out.println("give the name of the city  :");
-		String city = s.nextLine();
+	public void search_state() {
+		System.out.println("give the name of the state  :");
+		String state = s.nextLine();
 		
 		for (Entry<String, List<Person>> j : addressBook.entrySet()) {
 			List<Person> list = j.getValue();
-			list.stream().filter(person -> person.getCity().equals(city))
+			list.stream().filter(person -> person.getState().equals(state))
 					.forEach(person -> System.out.println(person.getFirstName()));
+		
+		}
+	}
+	
+	/* Counting person from address book by state or city name using java stream*/
+	
+	public void count_numberOfThePersonByCity_orState() {
+		System.out.println("give the name of the state or city  :");
+		String stateOrCityname = s.nextLine();
+		
+		for (Entry<String, List<Person>> set : addressBook.entrySet()) {
+			List<Person> list = set.getValue();
+			long countPeople = list.stream()
+					.filter(person -> person.getState().equals(stateOrCityname) || person.getCity().equals(stateOrCityname))
+					.count();
+			System.out.println("The number of people are  :"+countPeople);
 		
 		}
 	}
