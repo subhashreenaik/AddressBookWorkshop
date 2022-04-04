@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class AddressBookService {
@@ -65,59 +66,6 @@ public class AddressBookService {
 		} while (user.validEmailId(emailid) != true);
 
 	}
-
-	/*
-	 * This method first check the person's information is present or not, if not
-	 * then add the person's information to the addressBook.
-	 */
-	public void edit_Name() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("enter the name of the person");
-		String name = sc.nextLine();
-
-		for (int j = 0; j < contact.size(); j++) {
-			if (name.equals(contact.get(j).getFirstName())) {
-				enterInform();
-				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-				contact.set(j, person);
-			} else {
-				do {
-					System.out.println("the name is different : please give a correct name");
-					name = sc.nextLine();
-
-				} while (!name.equals(contact.get(j).getFirstName()));
-				enterInform();
-				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-				contact.set(j, person);
-				contact.stream().forEach(s -> System.out.println(s));
-			}
-		}
-	}
-
-	public void delete_byName() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("enter the name of the person");
-		String name = sc.nextLine();
-
-		for (int j = 0; j < contact.size(); j++) {
-			if (name.equals(contact.get(j).getFirstName())) {
-				enterInform();
-				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-				contact.remove(j);
-			} else {
-				do {
-					System.out.println("the name is different : please give a correct name");
-					name = sc.nextLine();
-
-				} while (!name.equals(contact.get(j).getFirstName()));
-				enterInform();
-				Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
-				contact.remove(j);
-				contact.stream().forEach(s -> System.out.println(s));
-			}
-		}
-	}
-
 	public void add_information() {
 		System.out.println("Enter number of Person you want to enter in a address Book ");
 		Scanner sc = new Scanner(System.in);
@@ -137,6 +85,166 @@ public class AddressBookService {
 		addressBook.entrySet().stream().forEach(e -> System.out.println(e));
 	}
 
+	/*
+	 * This method first check the person's information is present or not, if not
+	 * then add the person's information to the addressBook.
+	 */
+	
+	public void edit_ByName() {
+		System.out.println("enter the name of the person ,you want to edit");
+		String name = s.nextLine();
+		System.out.println("Enter choice...\\n1.For AddressBookOne \\n2.For AddressBookTwo \\n3.For AddressBookThree  :where you want to edit");
+		int choice = s.nextInt();
+		switch (choice) {
+		case 1:
+
+			
+				for (int j = 0; j < addressBook.get(book[0]).size(); j++) {
+					if (addressBook.get(book[0]).get(j).getFirstName().equals(name)) {
+						enterInform();
+						Person person1 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+						addressBook.get(book[0]).set(j, person1);
+
+					}
+					else {
+						do {
+							System.out.println("the name is different : please give a correct name");
+							name = s.nextLine();
+
+						} while (!addressBook.get(book[0]).get(j).getFirstName().equals(name));
+						enterInform();
+						Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+						addressBook.get(book[0]).set(j, person);
+				}
+			}
+			break;
+
+		case 2:
+
+			for (int j = 0; j < addressBook.get(book[1]).size(); j++) {
+				if (addressBook.get(book[1]).get(j).getFirstName().equals(name)) {
+					enterInform();
+					Person person1 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+					addressBook.get(book[1]).set(j, person1);
+
+				}
+				else {
+					do {
+						System.out.println("the name is different : please give a correct name");
+						name = s.nextLine();
+
+					} while (!addressBook.get(book[1]).get(j).getFirstName().equals(name));
+					enterInform();
+					Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+					addressBook.get(book[1]).set(j, person);
+			}
+		}
+		
+			break;
+
+		case 3:
+			for (int j = 0; j < addressBook.get(book[2]).size(); j++) {
+				if (addressBook.get(book[2]).get(j).getFirstName().equals(name)) {
+					enterInform();
+					Person person1 = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+					addressBook.get(book[2]).set(j, person1);
+
+				}
+				else {
+					do {
+						System.out.println("the name is different : please give a correct name");
+						name = s.nextLine();
+
+					} while (!addressBook.get(book[2]).get(j).getFirstName().equals(name));
+					enterInform();
+					Person person = new Person(fname, lname, add, city, state, zip, phoneno, emailid);
+					addressBook.get(book[2]).set(j, person);
+			}
+		}
+		
+			break;
+		}
+	}
+	/*
+	 * This method first check the person's information is present or not, if not
+	 * then delete the person's information from the addressBook.
+	 */
+
+	public void delete_byName() {
+		System.out.println("enter the name of the person ,you want to delete");
+		String name = s.nextLine();
+		System.out.println("Enter choice...\\n1.For AddressBookOne \\n2.For AddressBookTwo \\n3.For AddressBookThree  :where you want to delete");
+		int choice = s.nextInt();
+		switch (choice) {
+		case 1:
+
+			
+				for (int j = 0; j < addressBook.get(book[0]).size(); j++) {
+					if (addressBook.get(book[0]).get(j).getFirstName().equals(name)) {
+						
+						addressBook.get(book[0]).remove(j);
+
+					}
+					else {
+						do {
+							System.out.println("the name is different : please give a correct name");
+							name = s.nextLine();
+
+						} while (!addressBook.get(book[0]).get(j).getFirstName().equals(name));
+						
+						addressBook.get(book[0]).remove(j);
+				}
+			}
+			break;
+
+		case 2:
+
+			for (int j = 0; j < addressBook.get(book[1]).size(); j++) {
+				if (addressBook.get(book[1]).get(j).getFirstName().equals(name)) {
+					
+					addressBook.get(book[1]).remove(j);
+					System.out.println("The contact person is removed");
+
+				}
+				else {
+					do {
+						System.out.println("the name is different : please give a correct name");
+						name = s.nextLine();
+
+					} while (!addressBook.get(book[1]).get(j).getFirstName().equals(name));
+					
+					addressBook.get(book[1]).remove(j);
+					System.out.println("The contact person is removed");
+			}
+		}
+		
+			break;
+
+		case 3:
+			for (int j = 0; j < addressBook.get(book[2]).size(); j++) {
+				if (addressBook.get(book[2]).get(j).getFirstName().equals(name)) {
+					addressBook.get(book[2]).remove(j);
+					System.out.println("The contact person is removed");
+				}
+				else {
+					do {
+						System.out.println("the name is different : please give a correct name");
+						name = s.nextLine();
+
+					} while (!addressBook.get(book[2]).get(j).getFirstName().equals(name));
+					
+					addressBook.get(book[2]).remove(j);
+					System.out.println("The contact person is removed");
+			}
+		}
+		
+			break;
+		}
+	}
+	
+/** check duplicate and add person's information to the address book 
+ * **/
+	
 	public void check_duplicate_AndADD() {
 
 		System.out.println("Enter choice...\\n1.For AddressBookOne \\n2.For AddressBookTwo \\n3.For AddressBookThree");
@@ -217,6 +325,21 @@ public class AddressBookService {
 			break;
 		}
 		addressBook.entrySet().stream().forEach(e -> System.out.println(e));
+	}
+	
+	
+	/* Searching person from address book by city name using java stream*/
+	
+	public void search_city() {
+		System.out.println("give the name of the city  :");
+		String city = s.nextLine();
+		
+		for (Entry<String, List<Person>> j : addressBook.entrySet()) {
+			List<Person> list = j.getValue();
+			list.stream().filter(person -> person.getCity().equals(city))
+					.forEach(person -> System.out.println(person.getFirstName()));
+		
+		}
 	}
 
 }
